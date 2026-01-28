@@ -1,0 +1,27 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Create zip file
+        run: |
+          zip -r figures-${{ github.ref_name }}.zip en/
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: figures-${{ github.ref_name }}.zip
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
