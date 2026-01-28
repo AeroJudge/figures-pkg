@@ -17,11 +17,11 @@ jobs:
       
       - name: Create zip file
         run: |
-          zip -r figures-${{ github.ref_name }}.zip en/
+          zip -r figures.zip en/
       
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: figures-${{ github.ref_name }}.zip
+          files: figures.zip
           tag_name: ${{ github.ref_name }}
           generate_release_notes: true
